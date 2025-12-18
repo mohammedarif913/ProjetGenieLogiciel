@@ -1,3 +1,22 @@
+function construireMessages(anomalies, feu, type) {
+  const config = {
+    tension: {
+      anomalie: `Tension de service anormale: ${feu.tension_service || feu.Tension_service}`,
+      resolution: "Tension de service normalisée"
+    },
+    optique: {
+      anomalie: "État optique défectueux détecté",
+      resolution: "État optique rétabli"
+    },
+    autonomie: {
+      anomalie: `Autonomie critique: ${feu.autonomie || feu.Autonomie}`,
+      resolution: "Autonomie rétablie"
+    }
+  };
+
+  return [...anomalies].map(a => config[a][type]);
+}
+
 function verifierDonneesAnormales(feu) {
 
   if (isShuttingDown) return null;
@@ -40,19 +59,7 @@ function verifierDonneesAnormales(feu) {
 
   // Si nous avons de nouvelles anomalies, envoyer un email
   if (nouvellesAnomalies.size > 0) {
-
-    const messages = [];
-    if (nouvellesAnomalies.has("tension")) {
-      messages.push("Tension de service anormale: " + (feu.tension_service || feu.Tension_service));
-    }
-    if (nouvellesAnomalies.has("optique")) {
-      messages.push("État optique défectueux détecté");
-    }
-    if (nouvellesAnomalies.has("autonomie")) {
-      messages.push("Autonomie critique: " + (feu.autonomie || feu.Autonomie));
-    }
-
-    const messageAnomalie = messages.join(", ");
+    const messageAnomalie = construireMessages(nouvellesAnomalies, feu, 'anomalie').join(", ");
     console.log(`ALERTE! Nouvelles anomalies pour ${feuId}: ${messageAnomalie}`);
 
     try {
@@ -79,19 +86,7 @@ function verifierDonneesAnormales(feu) {
 
 
   if (anomaliesResolues.size > 0) {
-    // Construire le message de résolution pour l'envoyer
-    const messages = [];
-    if (anomaliesResolues.has("tension")) {
-      messages.push("Tension de service normalisée");
-    }
-    if (anomaliesResolues.has("optique")) {
-      messages.push("État optique rétabli");
-    }
-    if (anomaliesResolues.has("autonomie")) {
-      messages.push("Autonomie rétablie");
-    }
-
-    const messageResolution = messages.join(", ");
+    const messageResolution = construireMessages(anomaliesResolues, feu, 'resolution').join(", ");
     console.log(`RÉSOLUTION! Anomalies résolues pour ${feuId}: ${messageResolution}`);
 
     // Envoyer la notification au frontend
