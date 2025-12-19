@@ -1,0 +1,23 @@
+{
+  "name": "projetgenielogiciel",
+  "version": "1.0.0",
+  "description": "un projet du cours",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammedarif913/ProjetGenieLogiciel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammedarif913/ProjetGenieLogiciel/issues"
+  },
+  "homepage": "https://github.com/mohammedarif913/ProjetGenieLogiciel#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
