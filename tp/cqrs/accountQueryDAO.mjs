@@ -1,12 +1,8 @@
-import { ACCOUNT_LIST } from "./database.mjs";
+import { ACCOUNT_SUMMARY_LIST } from "./queryDatabase.mjs";
 
 export const accountQueryDAO = {
   retrieveAccountList() {
-    return ACCOUNT_LIST.map(({ id, lastName, firstName }) => ({
-      id,
-      lastName,
-      firstName,
-    }));
+    return ACCOUNT_SUMMARY_LIST;
   },
   retrieveAccount(id) {
     const account = ACCOUNT_LIST.find(acc => acc.id === id);
