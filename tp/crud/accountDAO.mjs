@@ -12,6 +12,13 @@ export const accountDAO = {
       firstName,
     }));
   },
-  updateAccount(account) {},
+  updateAccount(account) {
+    const index = ACCOUNT_LIST.findIndex(acc => acc.id === account.id);
+    if (index !== -1) {
+      ACCOUNT_LIST[index] = account;
+      console.log(`Account updated: ${account.firstName} ${account.lastName} (ID: ${account.id})`);
+      console.log("Database content:", ACCOUNT_LIST);
+    }
+  },
   retrieveAccount(id) {},
 };
