@@ -1,4 +1,5 @@
 import { ACCOUNT_LIST } from "./database.mjs";
+import { Account } from "./account"
 
 export const accountDAO = {
   insertAccount(account) {
@@ -20,5 +21,14 @@ export const accountDAO = {
       console.log("Database content:", ACCOUNT_LIST);
     }
   },
-  retrieveAccount(id) {},
+  retrieveAccount(id) {
+    const account = ACCOUNT_LIST.find(acc => acc.id === id);
+    if (account) {
+      return {
+        id: account.id,
+        name: account.lastName + " " + account.firstName
+      };
+    }
+    return null;
+  },
 };
