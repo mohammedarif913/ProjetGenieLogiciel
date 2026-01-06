@@ -6,7 +6,11 @@ export const accountDAO = {
     console.log(`Account inserted: ${account.firstName} ${account.lastName} (ID: ${account.id})`);
   },
   retrieveAccountList() {
-    return ACCOUNT_LIST;
+    return ACCOUNT_LIST.map(({ id, lastName, firstName }) => ({
+      id,
+      lastName,
+      firstName,
+    }));
   },
   updateAccount(account) {},
   retrieveAccount(id) {},
